@@ -21,7 +21,8 @@ def temperatura ():
         print("*****************")
 
         if val == 'e':
-            pass
+            break
+
        
 def exit():
     pass
