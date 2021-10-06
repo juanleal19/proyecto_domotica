@@ -14,28 +14,32 @@ time.sleep(1)
 
 #funcion que se ejecurta al optrimir el boton temperatura
 def temperatura ():
-    while True:
+    for i in range(0,10):
         serialArduino.write(b'a')
         val = serialArduino.readline().decode('ascii')
         print(val)
         print("*****************")
+    
+    serialArduino.write(b'e')
+    val = serialArduino.readline().decode('ascii')
+    print(val)
 
-        if val == 'e':
-            break
 
-       
+
 def exit():
-    pass
-
+    serialArduino.write(b'e')
 
 
 if __name__ == '__main__':
     
     etiqueta = tkinter.Label(window, text='Sistema domotico')
     etiqueta.pack()
-    
-    bototon1 = tkinter.Button(window, text = 'temperatura', command= temperatura)
+    # boton para la temperatura 
+    bototon1 = tkinter.Button(window, text = 'temperatura', command = temperatura)
     bototon1.pack(side= tkinter.RIGHT)
+
+    bototon2 = tkinter.Button(window, text = 'EXIT', command = exit)
+    bototon2.pack(side= tkinter.LEFT)
 
     window.title("SIS domotico")
 
