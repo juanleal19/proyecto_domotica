@@ -17,14 +17,14 @@ def temperatura ():
 
     datos_tem =[]
 
-    while True:
-    # for i in range(0,10):
+    #while True:
+    for i in range(0,10):
         serialArduino.write(b'a')
         val = serialArduino.readline().decode('ascii')
         print(val)
         dat = (val)
-        dat = dat
-        datos_tem.append(dat)
+        slc = slice(13,17,1)
+        datos_tem.append(val[slc])
         print("*****************")
     
     print(datos_tem)
