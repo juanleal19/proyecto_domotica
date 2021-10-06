@@ -14,16 +14,23 @@ time.sleep(1)
 
 #funcion que se ejecurta al optrimir el boton temperatura
 def temperatura ():
-    for i in range(0,10):
+
+    datos_tem =[]
+
+    while True:
+    # for i in range(0,10):
         serialArduino.write(b'a')
         val = serialArduino.readline().decode('ascii')
         print(val)
+        dat = (val)
+        dat = dat
+        datos_tem.append(dat)
         print("*****************")
     
+    print(datos_tem)
     serialArduino.write(b'e')
     val = serialArduino.readline().decode('ascii')
     print(val)
-
 
 
 def exit():
