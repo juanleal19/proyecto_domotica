@@ -2,13 +2,14 @@ from tkinter import *
 import tkinter
 import serial 
 import time
+import matplotlib.pyplot as plt
 
 
 
 window = Tk()
 window.geometry('600x500') #tamano de la ventana
 
-serialArduino = serial.Serial("COM6", 9600)
+serialArduino = serial.Serial("COM4", 9600)
 time.sleep(1)
 
 
@@ -22,8 +23,7 @@ def temperatura ():
         serialArduino.write(b'a')
         val = serialArduino.readline().decode('ascii')
         print(val)
-        dat = (val)
-        slc = slice(13,17,1)
+        slc = slice(27,32,1)
         datos_tem.append(val[slc])
         print("*****************")
     
@@ -31,6 +31,10 @@ def temperatura ():
     serialArduino.write(b'e')
     val = serialArduino.readline().decode('ascii')
     print(val)
+
+    x = [1, 2,3 ,4 ,5, 6, 7, 8, 9,10]
+    # hacer la grafica de los datos de temperatura
+    plt.plot(x, datos_tem)
 
 
 def exit():
