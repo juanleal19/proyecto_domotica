@@ -34,7 +34,7 @@ def temperatura ():
 
     x = [1, 2,3 ,4 ,5, 6, 7, 8, 9,10]
     # hacer la grafica de los datos de temperatura
-    plt.plot(x, datos_tem)
+  #  plt.plot(x, datos_tem)
 
 
 def exit():
