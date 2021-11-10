@@ -11,7 +11,7 @@ void setup() {
  
 int humedad()
 {
-  delay(500);
+  delay(1);
   float h = dht.readHumidity();
   if (isnan(h) ) {
     Serial.println("Error obteniendo los datos del sensor DHT22");
@@ -21,7 +21,7 @@ int humedad()
 }
 int temperatura()
 {
-  delay(500);  
+  delay(1);  
   float t = dht.readTemperature();
  
   if ( isnan(t)) {

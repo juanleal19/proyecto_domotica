@@ -19,9 +19,10 @@ def temperatura ():
     for i in range(0,10):
         serialArduino.write(b'2')
         val = serialArduino.readline().decode('ascii')
-        print(val)
-        datos_tem.append(val)
-        print("*****************")
+        #print(val)
+        val2 = slice(0,2,1)
+        datos_tem.append(val[val2])
+       
     
     print(datos_tem)
     
