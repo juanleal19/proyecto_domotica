@@ -1,8 +1,10 @@
 from tkinter import *
 import tkinter
 import serial 
-from bokeh.plotting import figure, show
 import time
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import numpy as np
 
 
 
@@ -11,41 +13,54 @@ window.geometry('600x500') #tamano de la ventana
 
 serialArduino = serial.Serial("COM4", 9600)
 time.sleep(1)
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+xdat , tdat ,hdat= [],[],[]
 
 
 #funcion que se ejecurta al optrimir el boton temperatura
 def temperatura ():
-
-    datos_tem =[]
     for i in range(0,10):
         serialArduino.write(b'2')
         val = serialArduino.readline().decode('ascii')
-        #print(val)
         val2 = slice(0,2,1)
         datos_tem = (val[val2])
-       
-    
     return datos_tem
-    
+
+def humedad ():
+    for i in range(0,10):
+        serialArduino.write(b'2')
+        val = serialArduino.readline().decode('ascii')
+        val2 = slice(0,2,1)
+        datos_hum= (val[val2])
+    return datos_hum
+
 
 def exit():
     serialArduino.write(b'e')
 
+
+def animate(i,xdat,tdat):
+    data = temperatura()
+    xdat.append(i)
+    tdat.append(data)
+    ax.clear()
+    ax.plot(xdat, tdat)
+    
+def animate2(i,xdat,hdat):
+    data = humedad()
+    xdat.append(i)
+    tdat.append(data)
+    ax.clear()
+    ax.plot(xdat, hdat)
+
 def grafica():
-    i = 0
-    x = []
-    y = []
+    ani = animation.FuncAnimation(fig, animate,fargs=(xdat, tdat))
+    plt.show()
 
-    for i in range(200):
-        data = temperatura()
-        x.append(i)
-        y.append(data)
-
-        p = figure(title = "example", x_axis_label="x", y_axis_label="y")
-        p.line(x, y, legend_label="Temp.", line_width=2)
-        print(data)
-        
-    show(p)
+def grafica2():
+    ani = animation.FuncAnimation(fig, animate,fargs=(xdat, hdat))
+    plt.show()
 
 if __name__ == '__main__':
     
