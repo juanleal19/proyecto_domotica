@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter
 import serial 
+from bokeh.plotting import figure, show
 import time
 
 
@@ -21,15 +22,30 @@ def temperatura ():
         val = serialArduino.readline().decode('ascii')
         #print(val)
         val2 = slice(0,2,1)
-        datos_tem.append(val[val2])
+        datos_tem = (val[val2])
        
     
-    print(datos_tem)
+    return datos_tem
     
 
 def exit():
     serialArduino.write(b'e')
 
+def grafica():
+    i = 0
+    x = []
+    y = []
+
+    for i in range(200):
+        data = temperatura()
+        x.append(i)
+        y.append(data)
+
+        p = figure(title = "example", x_axis_label="x", y_axis_label="y")
+        p.line(x, y, legend_label="Temp.", line_width=2)
+        print(data)
+        
+    show(p)
 
 if __name__ == '__main__':
     
@@ -41,6 +57,9 @@ if __name__ == '__main__':
 
     bototon2 = tkinter.Button(window, text = 'EXIT', command = exit)
     bototon2.pack(side= tkinter.LEFT)
+
+    bototon3 = tkinter.Button(window, text = 'grafica', command = grafica)
+    bototon3.pack(side= tkinter.BOTTOM)
 
     window.title("SIS domotico")
 
