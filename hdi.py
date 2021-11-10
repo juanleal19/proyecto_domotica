@@ -59,7 +59,7 @@ def grafica():
     plt.show()
 
 def grafica2():
-    ani = animation.FuncAnimation(fig, animate,fargs=(xdat, hdat))
+    ani = animation.FuncAnimation(fig, animate2,fargs=(xdat, hdat))
     plt.show()
 
 if __name__ == '__main__':
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     bototon2 = tkinter.Button(window, text = 'EXIT', command = exit)
     bototon2.pack(side= tkinter.LEFT)
 
-    bototon3 = tkinter.Button(window, text = 'grafica', command = grafica)
+    bototon3 = tkinter.Button(window, text = 'grafica', command = grafica2)
     bototon3.pack(side= tkinter.BOTTOM)
 
     window.title("SIS domotico")
