@@ -76,21 +76,33 @@ def grafica():
 #     plt.show()
 
 def servo():
-    serialArduino.write(b'3')
-    print("servo")
+    serialArduino.write(b's')
+    val = serialArduino.readline().decode('ascii')
+    print(val)
+    # val = serialArduino.readline().decode('ascii')
+    # print(val)
+    # serialArduino.write(b'90')
 
 def angulo_servo():
-    angulo = int(set_servo.get())
-    print(f"{angulo}")
-    serialArduino.write(angulo)
+    # angulo =(set_servo.get())
+    # print(f"el angulo es : {angulo}")
+    # print (type(angulo))
+    serialArduino.write(b'90')
+
+def on():
+    serialArduino.write(b'o')
+
+def off():
+    plt.close()
+    serialArduino.write(b'f')
 
 if __name__ == '__main__':
     
     etiqueta_tem = tkinter.Label(window)
-    etiqueta_tem.grid(row=1, column=3)
+    etiqueta_tem.grid(row=2, column=3)
     
     etiqueta_hum = tkinter.Label(window)
-    etiqueta_hum.grid(row=1, column=4)
+    etiqueta_hum.grid(row=2, column=4)
 
     bototon1 = tkinter.Button(window, text = 'Temperatura',width =10 ,height=5 , command = temperaturaPrnt)
     bototon1.grid(row=0, column=3)
@@ -108,13 +120,19 @@ if __name__ == '__main__':
     bototon5.grid(row=4, column=4)
     
     bototon6 = tkinter.Button(window, text = 'set',width =5 ,height=5 , command = angulo_servo)
-    bototon6.grid(row=2, column=6)
+    bototon6.grid(row=4, column=6)
     
     bototon7 = tkinter.Button(window, text = 'servo',width =10 ,height=5 , command = servo)
     bototon7.grid(row=0, column=6)
 
+    bototon8 = tkinter.Button(window, text = 'ON',width =5 ,height=5 , command = on)
+    bototon8.grid(row=2, column=7)
+
+    bototon9 = tkinter.Button(window, text = 'OFF',width =5 ,height=5 , command = off)
+    bototon9.grid(row=4, column=7)
+
     set_servo = tkinter.Entry(window)
-    set_servo.grid(row=1, column=6)
+    set_servo.grid(row=2, column=6)
     
     window.title("SIS domotico")
 

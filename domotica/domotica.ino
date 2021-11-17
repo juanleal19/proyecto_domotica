@@ -11,6 +11,7 @@ void setup() {
   Serial.begin(9600);
   dht.begin();
   servo1.attach(pinServo); 
+  pinMode(LED_BUILTIN, OUTPUT);
 }
  
 
@@ -38,8 +39,8 @@ int temperatura()
 
 int servo()
 {
-  Serial.print("servo");
   int x = 0;
+  Serial.print("listo");
   while (x < 3)
   {
   if(Serial.available() > 0){
@@ -61,8 +62,7 @@ int servo()
    }
   }
 }
-
-
+    
 void loop() {
   
 char Dato = Serial.read();
@@ -75,9 +75,22 @@ char Dato = Serial.read();
   {
     Serial.println(temperatura());
   }
-  else if (Dato == '3' )
+  else if (Dato == 's' )
   {
-    servo();
+    Serial.println("servo");
+   // servo();
+  }
+
+    else if (Dato == 'o' ) // dato para encender el led
+  {
+     digitalWrite(LED_BUILTIN, HIGH);   
+     delay(10);   
+  }
+    else if (Dato == 'f' )  // dato para apagar el led
+  {
+     digitalWrite(LED_BUILTIN, LOW);   
+     delay(10);     
+
   }
   
 }
