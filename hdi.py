@@ -84,55 +84,64 @@ def servo():
     # serialArduino.write(b'90')
 
 def angulo_servo():
-    # angulo =(set_servo.get())
-    # print(f"el angulo es : {angulo}")
-    # print (type(angulo))
-    serialArduino.write(b'90')
+    angulo =(set_servo.get())
+    etiqueta_angulo["text"] = angulo
+    #print(f"el angulo es : {angulo}")
+    #print (type(angulo))
+    serialArduino.write(angulo.encode('ascii'))
 
 def on():
     serialArduino.write(b'o')
+    bototon8["bg"]="green"
+    bototon9["bg"]="red"
 
 def off():
-    plt.close()
     serialArduino.write(b'f')
+    bototon8["bg"]="red"
+    bototon9["bg"]="green"
+
+
 
 if __name__ == '__main__':
     
     etiqueta_tem = tkinter.Label(window)
-    etiqueta_tem.grid(row=2, column=3)
+    etiqueta_tem.grid(row=1, column=1)
     
+    etiqueta_angulo = tkinter.Label(window)
+    etiqueta_angulo.grid(row=5, column=6)  
+
     etiqueta_hum = tkinter.Label(window)
-    etiqueta_hum.grid(row=2, column=4)
+    etiqueta_hum.grid(row=1, column=3)
 
-    bototon1 = tkinter.Button(window, text = 'Temperatura',width =10 ,height=5 , command = temperaturaPrnt)
-    bototon1.grid(row=0, column=3)
+    bototon1 = tkinter.Button(window, text = 'Temperatura',width =15 ,height=3 , command = temperaturaPrnt)
+    bototon1.grid(row=0, column=1)
     
-    bototon2 = tkinter.Button(window, text = 'Humedad',width =10 ,height=5 , command = humedadPrnt)
-    bototon2.grid(row=0, column=4)
+    bototon2 = tkinter.Button(window, text = 'Humedad',width =15 ,height=3 , command = humedadPrnt)
+    bototon2.grid(row=0, column=3)
 
-    bototon3 = tkinter.Button(window, text = 'EXIT',width =10 ,height=5 , command = exit)
-    bototon3.grid(row=0, column=0)
+    bototon3 = tkinter.Button(window, text = 'EXIT',width =10 ,height=3 , bg="red",fg="white", command = exit)
+    bototon3.grid(row=0, column=13)
 
-    bototon4 = tkinter.Button(window, text = 'Grafica Temperatura',width =15 ,height=5 , command = grafica)
-    bototon4.grid(row=4, column=3)
+    bototon4 = tkinter.Button(window, text = 'Grafica Temperatura',width =15 ,height=3 , command = grafica)
+    bototon4.grid(row=2, column=1)
     
-    bototon5 = tkinter.Button(window, text = 'Grafica Humedad',width =15 ,height=5 , command = grafica)
-    bototon5.grid(row=4, column=4)
+    bototon5 = tkinter.Button(window, text = 'Grafica Humedad',width =15 ,height=3 , command = grafica)
+    bototon5.grid(row=2, column=3)
     
-    bototon6 = tkinter.Button(window, text = 'set',width =5 ,height=5 , command = angulo_servo)
-    bototon6.grid(row=4, column=6)
+    bototon6 = tkinter.Button(window, text = 'set',width =5 ,height=3 , command = angulo_servo)
+    bototon6.grid(row=2, column=6)
     
-    bototon7 = tkinter.Button(window, text = 'servo',width =10 ,height=5 , command = servo)
+    bototon7 = tkinter.Button(window, text = 'servo',width =15 ,height=3 , command = servo)
     bototon7.grid(row=0, column=6)
 
-    bototon8 = tkinter.Button(window, text = 'ON',width =5 ,height=5 , command = on)
-    bototon8.grid(row=2, column=7)
+    bototon8 = tkinter.Button(window, text = 'ON',width =5 ,height=2 ,  command =on)
+    bototon8.grid(row=0, column=7)
 
-    bototon9 = tkinter.Button(window, text = 'OFF',width =5 ,height=5 , command = off)
-    bototon9.grid(row=4, column=7)
+    bototon9 = tkinter.Button(window, text = 'OFF',width =5 ,height=2 , command = off)
+    bototon9.grid(row=2, column=7)
 
     set_servo = tkinter.Entry(window)
-    set_servo.grid(row=2, column=6)
+    set_servo.grid(row=1, column=6)
     
     window.title("SIS domotico")
 

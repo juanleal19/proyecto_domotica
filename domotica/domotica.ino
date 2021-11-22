@@ -78,7 +78,7 @@ char Dato = Serial.read();
   else if (Dato == 's' )
   {
     Serial.println("servo");
-   // servo();
+    servo();
   }
 
     else if (Dato == 'o' ) // dato para encender el led
